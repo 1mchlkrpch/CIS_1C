@@ -14,32 +14,6 @@
 #include <algorithm>
 #include <set>
 
-std::vector<int> zFunction(std::vector<int16_t>& s, int extra_pos, int *best) {
-    std::vector<int> zf(s.size());
-
-    int l = 0;
-    int r = 0;
-
-    for (int i = 0; i < s.size(); ++i) {
-        zf[i] = std::max(0, std::min(zf[i - l], r - i + 1));
-
-        while (i + zf[i] < s.size() && s[i + zf[i]] == s[zf[i]]) {
-            ++zf[i];
-        }
-
-        if (i + zf[i] > r) {
-            l = i;
-            r = i + zf[i];
-        }
-
-        if (zf[i] > *best && i > extra_pos) {
-            *best = zf[i];
-        }
-    }
-
-    return zf;
-}
-
 #include <filesystem>
 
 namespace fs {
